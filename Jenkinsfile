@@ -4,14 +4,14 @@ pipeline {
     environment {
         DOCKER_IMAGE = "vvee11443/myapp"
         DOCKER_TAG = "latest"
-        DOCKER_CREDS = "jenkins-token"   // ← your ID
+        DOCKER_CREDS = "jenkins-token"
     }
 
     stages {
 
         stage('Clone Code') {
             steps {
-                git 'https://github.com/workdone911-coder/docker_d2.git'
+                git branch: 'main', url: 'https://github.com/workdone911-coder/docker_d2.git'
             }
         }
 
