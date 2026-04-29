@@ -17,21 +17,21 @@ pipeline {
 
         stage('Build Image') {
             steps {
-                sh 'docker build -t $DOCKER_IMAGE:$DOCKER_TAG .'
+                bat 'docker build -t %DOCKER_IMAGE%:%DOCKER_TAG% .'
             }
         }
 
         stage('Login Docker Hub') {
             steps {
                 withCredentials([usernamePassword(credentialsId: DOCKER_CREDS, usernameVariable: 'USER', passwordVariable: 'PASS')]) {
-                    sh 'echo $PASS | docker login -u $USER --password-stdin'
+                    bat 'echo %PASS% | docker login -u %USER% --password-stdin'
                 }
             }
         }
 
         stage('Push Image') {
             steps {
-                sh 'docker push $DOCKER_IMAGE:$DOCKER_TAG'
+                bat 'docker push %DOCKER_IMAGE%:%DOCKER_TAG%'
             }
         }
     }
